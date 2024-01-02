@@ -31,6 +31,7 @@ def main():
 
     loader = QUiLoader()
     window = loader.load(ui_file)
+    window.setWindowTitle("TicTacToe")
 
     # window = Widget()
     window.show()
