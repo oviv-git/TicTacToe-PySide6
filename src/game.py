@@ -1,9 +1,12 @@
 import random
 
 class TicTacToe:
-    def __init__(self):
+    # find out what type board_ui is for the annotation
+    def __init__(self, board_ui):
         self.board = [i + 1 for i in range(9)]
         self.available_moves = [i + 1 for i in range(9)]
+        self.board_ui = board_ui
+        print(board_ui)
 
     def make_move(self, move, symbol):
         self.board[move - 1] = symbol

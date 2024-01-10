@@ -16,14 +16,21 @@ from ui.app_ui import init_app
 #         self.setupUi(self)
 #         self.setWindowTitle("TicTacToe")
 
-# Adding some comments 
-# To make it seem like i commited
-# Im a piece of shit githuber caring about the green squares
-
 def main():
+    from slots.game_board import BoardUi
+
+    # board_ui = BoardUi()
+    # game = TicTacToe(board_ui)
+    # player_1 = HumanPlayer()
+    # player_2 = HumanPlayer()
+    # play = Play(game, player_1, player_2)
+
     app, window = init_app()
-    window.show()   
+    board_ui = BoardUi(window.board_tiles)
+    window.show()
     app.exec()
+    
+    
 
 if __name__ == "__main__":
     main()
@@ -41,9 +48,6 @@ if __name__ == "__main__":
 
     # window = Widget()
 
-    # game = TicTacToe()
-    # player_1 = HumanPlayer()
-    # player_2 = HumanPlayer()
-    # play = Play(game, player_1, player_2)
+    
     
     # app = QtWidgets.QApplication(sys.argv)
