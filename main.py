@@ -16,9 +16,13 @@ from ui.app_ui import init_app
 #         self.setupUi(self)
 #         self.setWindowTitle("TicTacToe")
 
+# Adding some comments 
+# To make it seem like i commited
+# Im a piece of shit githuber caring about the green squares
+
 def main():
     app, window = init_app()
-    window.show()
+    window.show()   
     app.exec()
 
 if __name__ == "__main__":
