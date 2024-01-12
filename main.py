@@ -1,7 +1,7 @@
 import sys
 
 from src.game import TicTacToe, Play
-from src.player import HumanPlayer
+from src.player import HumanPlayer, ComputerPlayer
 from PySide6 import QtWidgets
 from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QWidget, QApplication
@@ -20,15 +20,20 @@ def main():
     from slots.game_board import BoardUi
 
     # board_ui = BoardUi()
-    # game = TicTacToe(board_ui)
-    # player_1 = HumanPlayer()
-    # player_2 = HumanPlayer()
-    # play = Play(game, player_1, player_2)
+    player_1 = HumanPlayer()
+    player_2 = ComputerPlayer()
+    
+    
 
     app, window = init_app()
     board_ui = BoardUi(window.board_tiles)
+    game = TicTacToe(board_ui)
+    play = Play(game, player_1, player_2)
+
     window.show()
+    
     app.exec()
+    
     
     
 

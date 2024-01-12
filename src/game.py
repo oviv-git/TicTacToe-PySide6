@@ -1,4 +1,5 @@
 import random
+import asyncio
 
 class TicTacToe:
     # find out what type board_ui is for the annotation
@@ -6,11 +7,11 @@ class TicTacToe:
         self.board = [i + 1 for i in range(9)]
         self.available_moves = [i + 1 for i in range(9)]
         self.board_ui = board_ui
-        print(board_ui)
 
     def make_move(self, move, symbol):
         self.board[move - 1] = symbol
         self.available_moves.remove(move)
+
 
     def check_for_win(self):
         print('moves', self.available_moves)
@@ -45,10 +46,12 @@ class TicTacToe:
 class Play:
     def __init__(self, game, player_1, player_2):
         self.game = game
-
         self.set_players = [player_1, player_2]
-        self.current_player_list = [0, 1]
         self.current_player_choice = self.select_first_player()
+        
+        self.start_game_button_click()
+
+    def start_game_button_click(self):
         self.game_logic()
 
     @property
@@ -66,7 +69,7 @@ class Play:
         self._players = [self.player_1, self.player_2]
 
     def select_first_player(self):
-        current_player_choice = random.choice(self.current_player_list)
+        current_player_choice = random.choice(self.set_players)
         return current_player_choice
 
 
@@ -78,8 +81,10 @@ class Play:
             self.current_player_choice = 0
         
 
-    def game_logic(self):
+    async def game_logic(self):
         while True:
+            button_pressed = self.game.board_ui.place_tile()
+            print(button_pressed)
             player_move = self.set_players[self.current_player_choice].make_move()
             player_symbol = self.set_players[self.current_player_choice].get_symbol()
             self.game.make_move(player_move, player_symbol)

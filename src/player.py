@@ -11,5 +11,14 @@ class HumanPlayer:
     def get_symbol(self):
         return self.symbol
 
-    def make_move(self):
-        return int(input("make a move: "))
+
+class ComputerPlayer(HumanPlayer):
+    def __init__(self):
+        super().__init__()
+
+    def make_move():
+        pass
+
+    
+
+    

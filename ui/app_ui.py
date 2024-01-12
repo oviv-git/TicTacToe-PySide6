@@ -24,5 +24,5 @@ class MainWindow(QMainWindow):
 def init_app():
     app = QApplication(sys.argv)
     main_window = MainWindow()
-    main_window.resize(900, 900)
+    main_window.resize(600, 600)
     return app, main_window
