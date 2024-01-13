@@ -1,25 +1,28 @@
-class BoardUi():
-    def __init__(self, buttons) -> None:
-        self.buttons = buttons
-        self.setup_connections()
+from PySide6.QtCore import QObject, Signal
+from PySide6.QtWidgets import QPushButton
 
-    def setup_connections(self):
-        for button in self.buttons:
-            button.clicked.connect(lambda _=False, b=button: self.place_tile(b))
 
-    def place_tile(self, button):
-        # print(f"Button {button.objectName()} clicked")
-        button.setText(button.objectName())
-        button.setText('X')
+class BoardUi(QObject):
+    button_clicked = Signal(QPushButton)
+
+    def __init__(self, window) -> None:
+        super().__init__()
+        self.window = window
+        self.setup_board_connections()
+
+    def setup_board_connections(self):
+        for button in self.window.board_tiles:
+            button.clicked.connect(lambda _=False, b=button: self.click_button(b))
+
+    def finish_current_game(self):
+        self.window.tab_menu.setCurrentIndex(0)
+        for button in self.window.board_tiles:
+            button.setEnabled(True)
+            button.setText('')
+
+    def click_button(self, button):
         button.setEnabled(False)
-        return button.objectName()
-    
+        self.button_clicked.emit(button)
+
     def update_score(label, score):
         pass
-        
-
-
-
-
-
-    

@@ -1,16 +1,12 @@
 class HumanPlayer:
     def __init__(self):
-        pass
-
-    def __str__(self) -> str:
-        return self.symbol
+        self.symbol = ''
 
     def set_symbol(self, symbol):
         self.symbol = symbol
 
     def get_symbol(self):
         return self.symbol
-
 
 class ComputerPlayer(HumanPlayer):
     def __init__(self):

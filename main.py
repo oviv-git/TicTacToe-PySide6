@@ -16,30 +16,27 @@ from ui.app_ui import init_app
 #         self.setupUi(self)
 #         self.setWindowTitle("TicTacToe")
 
+
 def main():
     from slots.game_board import BoardUi
 
     # board_ui = BoardUi()
     player_1 = HumanPlayer()
     player_2 = ComputerPlayer()
-    
-    
 
     app, window = init_app()
-    board_ui = BoardUi(window.board_tiles)
+    window.setWindowTitle("TicTacToe")
+    board_ui = BoardUi(window)
     game = TicTacToe(board_ui)
     play = Play(game, player_1, player_2)
 
     window.show()
-    
+
     app.exec()
-    
-    
-    
+
 
 if __name__ == "__main__":
     main()
-
 
     # app = QApplication(sys.argv)
     # ui_file = QFile("ui/Widget.ui")
@@ -53,6 +50,4 @@ if __name__ == "__main__":
 
     # window = Widget()
 
-    
-    
     # app = QtWidgets.QApplication(sys.argv)

@@ -1,5 +1,5 @@
 import random
-import asyncio
+
 
 class TicTacToe:
     # find out what type board_ui is for the annotation
@@ -12,22 +12,21 @@ class TicTacToe:
         self.board[move - 1] = symbol
         self.available_moves.remove(move)
 
-
     def check_for_win(self):
-        print('moves', self.available_moves)
-        for i in range(0,9,3):
-            print(self.board[i: i+3])
-        print('')
+        print("moves", self.available_moves)
+        for i in range(0, 9, 3):
+            print(self.board[i : i + 3])
+        print("")
 
         # Horizontal Win Condition
-        for i in range(0,9,3):
-            row = set(self.board[i: i+3])
+        for i in range(0, 9, 3):
+            row = set(self.board[i : i + 3])
             if len(row) == 1:
                 return True
 
         # Vertical Win Condition
-        for i in range(0,3):
-            h_row = set([self.board[i], self.board[i+3], self.board[i+6]])
+        for i in range(0, 3):
+            h_row = set([self.board[i], self.board[i + 3], self.board[i + 6]])
             if len(h_row) == 1:
                 return True
 
@@ -35,7 +34,7 @@ class TicTacToe:
         l_diagonal = set([self.board[0], self.board[4], self.board[8]])
         if len(l_diagonal) == 1:
             return True
-        
+
         # Right Diagonal Win
         r_diagonal = set([self.board[2], self.board[4], self.board[6]])
         if len(r_diagonal) == 1:
@@ -46,60 +45,64 @@ class TicTacToe:
 class Play:
     def __init__(self, game, player_1, player_2):
         self.game = game
-        self.set_players = [player_1, player_2]
+        self.players = [player_1, player_2]
+        self.players_index = [0, 1]
         self.current_player_choice = self.select_first_player()
-        
-        self.start_game_button_click()
+        self.init_symbols()
 
-    def start_game_button_click(self):
-        self.game_logic()
+        self.setup_connections()
+        self.game.board_ui.button_clicked.connect(self.board_button_click)
 
-    @property
-    def set_players(self):
-        return self._players
+    def setup_connections(self):
+        self.game.board_ui.window.start_game_button.clicked.connect(
+            self.start_game_button
+        )
 
-    @set_players.setter
-    def set_players(self, players_list):
-        self.player_1 = players_list[0]
-        self.player_1.set_symbol("X")
+    def start_game_button(self):
+        self.game.board_ui.window.tab_menu.setCurrentIndex(1)
 
-        self.player_2 = players_list[1]
-        self.player_2.set_symbol("O")
-
-        self._players = [self.player_1, self.player_2]
+    def board_button_click(self, button):
+        move = str(button.objectName()).split("_")[1]
+        self.game_logic(button, move)
+        # player_symbol = self.players[self.current_player_choice]
+        # print(str(button.objectName()).split('_')[1])
+        # button.setText('X')
 
     def select_first_player(self):
-        current_player_choice = random.choice(self.set_players)
-        return current_player_choice
+        return random.choice(self.players_index)
 
+    def init_symbols(self):
+        self.players[self.current_player_choice].set_symbol("X")
+        self.players[self.current_player_choice - 1].set_symbol("O")
 
     def swap_current_player(self):
-        print(self.current_player_choice)
         if self.current_player_choice == 0:
             self.current_player_choice = 1
         else:
             self.current_player_choice = 0
-        
 
-    async def game_logic(self):
-        while True:
-            button_pressed = self.game.board_ui.place_tile()
-            print(button_pressed)
-            player_move = self.set_players[self.current_player_choice].make_move()
-            player_symbol = self.set_players[self.current_player_choice].get_symbol()
-            self.game.make_move(player_move, player_symbol)
-            
-            if self.game.check_for_win():
-                break
-            
-            if len(self.game.available_moves) == 0:
-                print('Tie Game')
-                break
-            
+    def game_logic(self, button, move):
+        current_player = self.players[self.current_player_choice]
+        symbol = current_player.get_symbol()
+        button.setText(symbol)
+        self.game.make_move(int(move), symbol)
+
+        if self.game.check_for_win():
+            self.declare_winner()
+
+        elif len(self.game.available_moves) == 0:
+            self.declare_tie_game()
+
+        else:
             self.swap_current_player()
-            continue
-        self.declare_winner()
 
     def declare_winner(self):
-        print(f"winner = {self.set_players[self.current_player_choice]}")
+        print(f"winner = {self.players[self.current_player_choice]}")
+        self.game.board_ui.finish_current_game()
 
+    def declare_tie_game(self):
+        pass
+
+    def reset_board_state(self):
+        pass
+        # resets board, tiles and available moves back to base

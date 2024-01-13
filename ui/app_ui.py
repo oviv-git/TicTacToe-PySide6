@@ -8,18 +8,26 @@ from PySide6.QtUiTools import QUiLoader
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        ui_file = QFile('ui/Widget.ui')
+        ui_file = QFile("ui/Widget.ui")
         ui_file.open(QFile.ReadOnly)
 
         loader = QUiLoader()
         self.window = loader.load(ui_file, self)
-        self.window.setWindowTitle('TicTacToe')
+
+        self.tab_menu = self.window.findChild(QtWidgets.QTabWidget, "tabWidget")
+        self.tab_menu.tabBar().hide()
 
         self.board_tiles = []
         for i in range(1, 10):
-            tile_name = f'tile_{i}'
-            self.board_tiles.append(self.window.findChild(QtWidgets.QPushButton, tile_name))
-        
+            tile_name = f"tile_{i}"
+            self.board_tiles.append(
+                self.window.findChild(QtWidgets.QPushButton, tile_name)
+            )
+
+        self.start_game_button = self.window.findChild(
+            QtWidgets.QPushButton, "startGameButton"
+        )
+
 
 def init_app():
     app = QApplication(sys.argv)
