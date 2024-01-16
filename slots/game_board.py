@@ -20,6 +20,10 @@ class BoardUi(QObject):
             button.setEnabled(True)
             button.setText('')
 
+    def disable_all_tiles(self):
+        for button in self.window.board_tiles:
+            button.setEnabled(False)
+
     def click_button(self, button):
         button.setEnabled(False)
         self.button_clicked.emit(button)

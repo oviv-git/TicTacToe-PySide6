@@ -21,13 +21,14 @@ def main():
     from slots.game_board import BoardUi
 
     # board_ui = BoardUi()
-    player_1 = HumanPlayer()
-    player_2 = ComputerPlayer()
+    
 
     app, window = init_app()
     window.setWindowTitle("TicTacToe")
     board_ui = BoardUi(window)
     game = TicTacToe(board_ui)
+    player_1 = HumanPlayer()
+    player_2 = ComputerPlayer()
     play = Play(game, player_1, player_2)
 
     window.show()

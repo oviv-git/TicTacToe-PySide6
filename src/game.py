@@ -26,12 +26,14 @@ class TicTacToe:
         for i in range(0, 9, 3):
             row = set(self.board[i : i + 3])
             if len(row) == 1:
+                print(i)
                 return True
 
         # Vertical Win Condition
         for i in range(0, 3):
-            h_row = set([self.board[i], self.board[i + 3], self.board[i + 6]])
-            if len(h_row) == 1:
+            column = set([self.board[i], self.board[i + 3], self.board[i + 6]])
+            if len(column) == 1:
+                print(i)
                 return True
 
         # Left Diagonal Win
@@ -52,7 +54,7 @@ class Play:
         self.players = [player_1, player_2]
         self.players_index = [0, 1]
         self.current_player_choice = self.select_first_player()
-        self.init_symbols()
+        self.set_symbols()
 
         self.setup_connections()
         self.game.board_ui.button_clicked.connect(self.board_button_click)
@@ -66,8 +68,7 @@ class Play:
         self.game.board_ui.window.tab_menu.setCurrentIndex(1)
 
     def board_button_click(self, button):
-        move = str(button.objectName()).split("_")[1]
-        self.game_logic(button, move)
+        self.game_logic(button)
         # player_symbol = self.players[self.current_player_choice]
         # print(str(button.objectName()).split('_')[1])
         # button.setText('X')
@@ -75,7 +76,7 @@ class Play:
     def select_first_player(self):
         return random.choice(self.players_index)
 
-    def init_symbols(self):
+    def set_symbols(self):
         self.players[self.current_player_choice].set_symbol("X")
         self.players[self.current_player_choice - 1].set_symbol("O")
 
@@ -85,10 +86,14 @@ class Play:
         else:
             self.current_player_choice = 0
 
-    def game_logic(self, button, move):
+    def game_logic(self, button):
+        
         current_player = self.players[self.current_player_choice]
         symbol = current_player.get_symbol()
+
+        move = current_player.make_move(button, self.game.available_moves)
         button.setText(symbol)
+
         self.game.make_move(int(move), symbol)
 
         if self.game.check_for_win():
@@ -103,10 +108,12 @@ class Play:
     def reset_game(self):
         self.game.board_ui.finish_current_game()
         self.current_player_choice = self.select_first_player()
+        self.set_symbols()
         self.game.remake_board()
 
     def declare_winner(self):
-        self.game.board_ui.delay_action(2000, self.reset_game())
+        self.game.board_ui.disable_all_tiles()
+        self.game.board_ui.delay_action(1000, self.reset_game)
         # self.reset_game()
         
     def declare_tie_game(self):
