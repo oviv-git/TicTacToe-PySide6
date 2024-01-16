@@ -8,6 +8,10 @@ class TicTacToe:
         self.available_moves = [i + 1 for i in range(9)]
         self.board_ui = board_ui
 
+    def remake_board(self):
+        self.board = [i + 1 for i in range(9)]
+        self.available_moves = [i + 1 for i in range(9)]
+
     def make_move(self, move, symbol):
         self.board[move - 1] = symbol
         self.available_moves.remove(move)
@@ -96,13 +100,16 @@ class Play:
         else:
             self.swap_current_player()
 
-    def declare_winner(self):
-        print(f"winner = {self.players[self.current_player_choice]}")
+    def reset_game(self):
         self.game.board_ui.finish_current_game()
+        self.current_player_choice = self.select_first_player()
+        self.game.remake_board()
 
+    def declare_winner(self):
+        self.game.board_ui.delay_action(2000, self.reset_game())
+        # self.reset_game()
+        
     def declare_tie_game(self):
-        pass
+        self.reset_game()
 
-    def reset_board_state(self):
-        pass
-        # resets board, tiles and available moves back to base
+

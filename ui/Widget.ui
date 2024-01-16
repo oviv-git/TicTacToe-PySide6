@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>777</height>
+    <width>883</width>
+    <height>894</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,11 +28,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_6">
+  <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="menuTab">
       <attribute name="title">
@@ -51,8 +51,12 @@
           <font>
            <family>Elephant</family>
            <pointsize>64</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+           <underline>false</underline>
+           <strikeout>false</strikeout>
+           <kerning>false</kerning>
           </font>
          </property>
          <property name="text">
@@ -225,7 +229,10 @@
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_5" rowstretch="0">
+      <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -238,19 +245,83 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="boardVLayout" stretch="0,0,0">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetMaximumSize</enum>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="rowHLayout_1">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinAndMaxSize</enum>
+       <item>
+        <layout class="QHBoxLayout" name="gameInfoLayout" stretch="2,1,0,1,2">
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
            </property>
+           <property name="text">
+            <string>Huamn Player: O</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>0</width>
+             <height>60</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Minimum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>CPU: X</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="boardGrid">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="rowHLayout_1">
            <item>
             <widget class="QPushButton" name="tile_1">
              <property name="sizePolicy">
@@ -261,31 +332,34 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -303,31 +377,34 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -345,31 +422,34 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -379,144 +459,8 @@
            </item>
           </layout>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="rowHLayout_2">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinAndMaxSize</enum>
-           </property>
-           <item>
-            <widget class="QPushButton" name="tile_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>200</height>
-              </size>
-             </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>48</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="tile_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>200</height>
-              </size>
-             </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>48</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="tile_6">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>200</height>
-              </size>
-             </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>48</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
+         <item row="2" column="0">
           <layout class="QHBoxLayout" name="rowHLayout_3">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinAndMaxSize</enum>
-           </property>
            <item>
             <widget class="QPushButton" name="tile_7">
              <property name="sizePolicy">
@@ -527,31 +471,34 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -569,31 +516,34 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
-             <property name="sizeIncrement">
-              <size>
-               <width>50</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">
@@ -611,31 +561,173 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
               <size>
                <width>200</width>
                <height>200</height>
               </size>
              </property>
+             <property name="font">
+              <font>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="rowHLayout_2">
+           <item>
+            <widget class="QPushButton" name="tile_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
              <property name="sizeIncrement">
               <size>
-               <width>50</width>
-               <height>50</height>
+               <width>10</width>
+               <height>10</height>
               </size>
              </property>
              <property name="baseSize">
               <size>
-               <width>100</width>
-               <height>100</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="font">
               <font>
-               <pointsize>48</pointsize>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tile_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="tile_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Gill Sans MT</family>
+               <pointsize>84</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="text">

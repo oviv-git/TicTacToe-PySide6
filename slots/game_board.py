@@ -1,4 +1,4 @@
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject, Signal, QTimer
 from PySide6.QtWidgets import QPushButton
 
 
@@ -26,3 +26,6 @@ class BoardUi(QObject):
 
     def update_score(label, score):
         pass
+
+    def delay_action(self, delay, function):
+        QTimer.singleShot(delay, function)
