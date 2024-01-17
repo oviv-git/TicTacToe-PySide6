@@ -15,10 +15,10 @@ class BoardUi(QObject):
             button.clicked.connect(lambda _=False, b=button: self.click_button(b))
 
     def finish_current_game(self):
-        self.window.tab_menu.setCurrentIndex(0)
         for button in self.window.board_tiles:
             button.setEnabled(True)
-            button.setText('')
+            button.setText("")
+        self.window.tab_menu.setCurrentIndex(0)
 
     def disable_all_tiles(self):
         for button in self.window.board_tiles:
@@ -27,6 +27,10 @@ class BoardUi(QObject):
     def click_button(self, button):
         button.setEnabled(False)
         self.button_clicked.emit(button)
+
+    def make_move(self, button, symbol):
+        button.setEnabled(False)
+        button.setText(symbol)
 
     def update_score(label, score):
         pass

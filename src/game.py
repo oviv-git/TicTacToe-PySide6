@@ -1,4 +1,5 @@
 import random
+from src.player import HumanPlayer, ComputerPlayer
 
 
 class TicTacToe:
@@ -14,6 +15,8 @@ class TicTacToe:
 
     def make_move(self, move, symbol):
         self.board[move - 1] = symbol
+        print(move, symbol)
+        print(self.available_moves)
         self.available_moves.remove(move)
 
     def check_for_win(self):
@@ -55,6 +58,7 @@ class Play:
         self.players_index = [0, 1]
         self.current_player_choice = self.select_first_player()
         self.set_symbols()
+        self.cpu = player_2
 
         self.setup_connections()
         self.game.board_ui.button_clicked.connect(self.board_button_click)
@@ -66,9 +70,14 @@ class Play:
 
     def start_game_button(self):
         self.game.board_ui.window.tab_menu.setCurrentIndex(1)
+        current_player = self.players[self.current_player_choice]
+        print(current_player)
+        if isinstance(current_player, ComputerPlayer):
+            self.game_logic()
 
     def board_button_click(self, button):
-        self.game_logic(button)
+        self.current_button = button
+        self.game_logic()
         # player_symbol = self.players[self.current_player_choice]
         # print(str(button.objectName()).split('_')[1])
         # button.setText('X')
@@ -86,15 +95,20 @@ class Play:
         else:
             self.current_player_choice = 0
 
-    def game_logic(self, button):
-        
+    def game_logic(self):
         current_player = self.players[self.current_player_choice]
         symbol = current_player.get_symbol()
 
-        move = current_player.make_move(button, self.game.available_moves)
-        button.setText(symbol)
+        if isinstance(current_player, ComputerPlayer):
+            move = current_player.make_move(self.game.available_moves)
+            button = self.game.board_ui.window.board_tiles[move - 1]
+
+        elif isinstance(current_player, HumanPlayer):
+            move = current_player.make_move(self.current_button)
+            button = self.game.board_ui.window.board_tiles[move - 1]
 
         self.game.make_move(int(move), symbol)
+        self.game.board_ui.make_move(button, symbol)
 
         if self.game.check_for_win():
             self.declare_winner()
@@ -104,19 +118,19 @@ class Play:
 
         else:
             self.swap_current_player()
+            if isinstance(self.players[self.current_player_choice], ComputerPlayer):
+                self.game_logic()
 
     def reset_game(self):
-        self.game.board_ui.finish_current_game()
         self.current_player_choice = self.select_first_player()
         self.set_symbols()
         self.game.remake_board()
+        self.game.board_ui.finish_current_game()
 
     def declare_winner(self):
         self.game.board_ui.disable_all_tiles()
-        self.game.board_ui.delay_action(1000, self.reset_game)
-        # self.reset_game()
-        
-    def declare_tie_game(self):
+        # self.game.board_ui.delay_action(1000, self.reset_game)
         self.reset_game()
 
-
+    def declare_tie_game(self):
+        self.reset_game()

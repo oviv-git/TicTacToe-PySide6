@@ -21,7 +21,6 @@ def main():
     from slots.game_board import BoardUi
 
     # board_ui = BoardUi()
-    
 
     app, window = init_app()
     window.setWindowTitle("TicTacToe")
