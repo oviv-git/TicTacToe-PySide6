@@ -9,6 +9,7 @@ class BoardUi(QObject):
         super().__init__()
         self.window = window
         self.setup_board_connections()
+        self.label_font = self.window.game_labels[0].font()
 
     def setup_board_connections(self):
         for button in self.window.board_tiles:
@@ -32,8 +33,26 @@ class BoardUi(QObject):
         button.setEnabled(False)
         button.setText(symbol)
 
-    def update_score(label, score):
-        pass
+    def set_game_labels(self, players):
+        for i in range(len(players)):
+            self.window.game_labels[i].setText(f"{str(players[i])}")
 
-    def delay_action(self, delay, function):
-        QTimer.singleShot(delay, function)
+    def remove_game_label_underline(self):
+        font = self.label_font
+        font.setUnderline(False)
+
+        for label in self.window.game_labels:
+            label.setFont(font)
+
+    def underline_current_player_game_label(self, current_player):
+        font = self.label_font
+        font.setUnderline(True)
+
+        current_label = self.window.game_labels[current_player]
+        current_label.setFont(font)
+
+    def update_score(self, label):
+        print(self.window.game_labels)
+
+    def delay_action(self, delay, function, *args, **kwargs):
+        QTimer.singleShot(delay, lambda: function(*args, **kwargs))

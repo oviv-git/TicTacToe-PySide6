@@ -1,7 +1,14 @@
 import sys
 from PySide6 import QtWidgets
 from PySide6.QtCore import QFile
-from PySide6.QtWidgets import QWidget, QApplication, QMainWindow, QPushButton, QLabel
+from PySide6.QtWidgets import (
+    QWidget,
+    QApplication,
+    QMainWindow,
+    QComboBox,
+    QPushButton,
+    QLabel,
+)
 from PySide6.QtUiTools import QUiLoader
 
 
@@ -14,19 +21,43 @@ class MainWindow(QMainWindow):
         loader = QUiLoader()
         self.window = loader.load(ui_file, self)
 
+        # Initializing the selection of the player types from the QComboBoxes
+        self.playerSelections = []
+        for i in range(1, 3):
+            comboBox = f"player_{i}Selection"
+            self.playerSelections.append(
+                self.window.findChild(QtWidgets.QComboBox, comboBox)
+            )
+
+        print(self.playerSelections)
+        # Initialzing each players score next to their selection
+        self.playerScores = []
+        for i in range(1, 3):
+            label = f"player_{i}Label"
+            self.playerScores.append(self.window.findChild(QtWidgets.QLabel, label))
+
+        # Initializing the tab and then hiding the tab bar
         self.tab_menu = self.window.findChild(QtWidgets.QTabWidget, "tabWidget")
         self.tab_menu.tabBar().hide()
 
+        # Initializing the start game button
+        self.start_game_button = self.window.findChild(
+            QtWidgets.QPushButton, "startGameButton"
+        )
+
+        # Initializing a list of the labels inside of the game tab
+        self.game_labels = []
+        for i in range(1, 3):
+            label_name = f"gameLabel_{i}"
+            self.game_labels.append(self.window.findChild(QtWidgets.QLabel, label_name))
+
+        # Initializing a list of the board tiles
         self.board_tiles = []
         for i in range(1, 10):
             tile_name = f"tile_{i}"
             self.board_tiles.append(
                 self.window.findChild(QtWidgets.QPushButton, tile_name)
             )
-
-        self.start_game_button = self.window.findChild(
-            QtWidgets.QPushButton, "startGameButton"
-        )
 
 
 def init_app():

@@ -15,7 +15,7 @@ class HumanPlayer:
         return self.symbol
 
     def make_move(self, button):
-        print(button)
+        # print(button)
         return int(str(button.objectName()).split("_")[1])
 
 
