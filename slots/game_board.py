@@ -3,9 +3,27 @@ from PySide6.QtWidgets import QPushButton
 
 
 class BoardUi(QObject):
+    """
+    Responsible for managing the Ui elements of the game. Connects the slots of the 
+    board tiles, all the labels that display information about the current players 
+    and the results of the games.
+
+    :ivar button_clicked: button_clicked (Signal): Signal emitted when a signal (QPushButton) 
+    is clicked
+    """
+
     button_clicked = Signal(QPushButton)
 
     def __init__(self, window) -> None:
+        """Initializies the BoardUi object
+
+        Keyword arguments:
+
+        Initializes the window, sets up all the board connections and sets up the label fonts
+        argument -- description
+        Return: return_description
+        """
+
         super().__init__()
         self.window = window
         self.setup_board_connections()
@@ -37,7 +55,6 @@ class BoardUi(QObject):
         for i in range(len(players)):
             self.window.game_labels[i].setText(f"{str(players[i])}")
 
-    
     def reset_game_label(self):
         font = self.label_font
         font.setUnderline(False)
@@ -52,8 +69,13 @@ class BoardUi(QObject):
         current_label = self.window.game_labels[current_player]
         current_label.setFont(font)
 
-    def update_score(self, label):
-        print(self.window.game_labels)
+    def update_score(self, winning_player):
+        # print(self.window.player_score_labels[winning_player].text())
+        new_score = 1 + int(self.window.player_score_labels[winning_player].text())
+        self.window.player_score_labels[winning_player].setText(str(new_score))
+
+    def update_results_label(self, game_results):
+        self.window.game_results_label.setText(game_results)
 
     def delay_action(self, delay, function, *args, **kwargs):
         QTimer.singleShot(delay, lambda: function(*args, **kwargs))

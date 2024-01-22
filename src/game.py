@@ -73,20 +73,24 @@ class Play:
 
         # Map to set the the proper player object based on the dropdown menu (QComboBox)
         playerMap = {"Human Player": HumanPlayer, "Computer Player": ComputerPlayer}
-        self.players[0] = playerMap[self.game.board_ui.window.playerSelections[0].currentText()]()
-        self.players[1] = playerMap[self.game.board_ui.window.playerSelections[1].currentText()]()
+        self.players[0] = playerMap[
+            self.game.board_ui.window.playerSelections[0].currentText()
+        ]()
+        self.players[1] = playerMap[
+            self.game.board_ui.window.playerSelections[1].currentText()
+        ]()
 
         # Uses random.choice on self.players_index to decide who goes first
         current_player = self.players[self.current_player_choice]
         self.set_symbols()
-        
-        #
-        self.game.board_ui.set_game_labels(self.players)
-        self.game.board_ui.display_current_player_game_label(
-            self.current_player_choice
-        )
-        
 
+        # Sets up the labels based on the player types
+        self.game.board_ui.set_game_labels(self.players)
+
+        # Displays a visual queue to represent which players turn it is
+        self.game.board_ui.display_current_player_game_label(self.current_player_choice)
+
+        # If the current_player is a CPU then delay the action so its not instant
         if isinstance(current_player, ComputerPlayer):
             self.game.board_ui.delay_action(100, self.game_logic)
 
@@ -156,9 +160,13 @@ class Play:
         self.game.board_ui.finish_current_game()
 
     def declare_winner(self):
+        results_text = f"Player {self.current_player_choice + 1} Wins!"
+        self.game.board_ui.update_results_label(results_text)
+        self.game.board_ui.update_score(self.current_player_choice)
         self.game.board_ui.disable_all_tiles()
-        # self.game.board_ui.delay_action(1000, self.reset_game)
         self.reset_game()
 
     def declare_tie_game(self):
+        results_text = "Tie Game"
+        self.game.board_ui.update_results_label(results_text)
         self.reset_game()

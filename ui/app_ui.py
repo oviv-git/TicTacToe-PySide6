@@ -29,12 +29,18 @@ class MainWindow(QMainWindow):
                 self.window.findChild(QtWidgets.QComboBox, comboBox)
             )
 
-        print(self.playerSelections)
+        # Initializing the game results label
+        self.game_results_label = self.window.findChild(
+            QtWidgets.QLabel, "gameResultsLabel"
+        )
+
         # Initialzing each players score next to their selection
-        self.playerScores = []
+        self.player_score_labels = []
         for i in range(1, 3):
-            label = f"player_{i}Label"
-            self.playerScores.append(self.window.findChild(QtWidgets.QLabel, label))
+            label = f"player_{i}Score"
+            self.player_score_labels.append(
+                self.window.findChild(QtWidgets.QLabel, label)
+            )
 
         # Initializing the tab and then hiding the tab bar
         self.tab_menu = self.window.findChild(QtWidgets.QTabWidget, "tabWidget")
