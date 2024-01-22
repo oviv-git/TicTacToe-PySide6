@@ -21,7 +21,6 @@ def main():
     from slots.game_board import BoardUi
 
     # Map to safely select the type of player class with the comboBoxes
-    playerMap = {"Human Player": HumanPlayer, "Computer Player": ComputerPlayer}
 
     app, window = init_app()
     window.setWindowTitle("TicTacToe")
@@ -35,7 +34,7 @@ def main():
     player_1 = ComputerPlayer()
     player_2 = ComputerPlayer()
     # player_2 = ComputerPlayer()
-    play = Play(game, player_1, player_2)
+    play = Play(game)
 
     window.show()
 

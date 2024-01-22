@@ -37,14 +37,15 @@ class BoardUi(QObject):
         for i in range(len(players)):
             self.window.game_labels[i].setText(f"{str(players[i])}")
 
-    def remove_game_label_underline(self):
+    
+    def reset_game_label(self):
         font = self.label_font
         font.setUnderline(False)
 
         for label in self.window.game_labels:
             label.setFont(font)
 
-    def underline_current_player_game_label(self, current_player):
+    def display_current_player_game_label(self, current_player):
         font = self.label_font
         font.setUnderline(True)
 

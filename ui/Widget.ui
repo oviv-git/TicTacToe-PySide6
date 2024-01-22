@@ -118,11 +118,11 @@
                  </item>
                 </widget>
                </item>
-               <item alignment="Qt::AlignHCenter">
+               <item alignment="Qt::AlignLeft">
                 <widget class="QLabel" name="player_1Score">
                  <property name="font">
                   <font>
-                   <pointsize>16</pointsize>
+                   <pointsize>24</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -182,11 +182,11 @@
                  </item>
                 </widget>
                </item>
-               <item alignment="Qt::AlignHCenter">
+               <item alignment="Qt::AlignLeft">
                 <widget class="QLabel" name="player_2Score">
                  <property name="font">
                   <font>
-                   <pointsize>16</pointsize>
+                   <pointsize>24</pointsize>
                   </font>
                  </property>
                  <property name="text">

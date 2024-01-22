@@ -53,13 +53,11 @@ class TicTacToe:
 
 
 class Play:
-    def __init__(self, game, player_1, player_2):
+    def __init__(self, game):
         self.game = game
-        self.players = [player_1, player_2]
+        self.players = [HumanPlayer(), ComputerPlayer()]
         self.players_index = [0, 1]
         self.current_player_choice = self.select_first_player()
-
-        self.set_symbols()
 
         self.setup_connections()
         self.game.board_ui.button_clicked.connect(self.board_button_click)
@@ -70,12 +68,24 @@ class Play:
         )
 
     def start_game_button(self):
+        # The only way to change tabs is with the 'Start Game' button
         self.game.board_ui.window.tab_menu.setCurrentIndex(1)
+
+        # Map to set the the proper player object based on the dropdown menu (QComboBox)
+        playerMap = {"Human Player": HumanPlayer, "Computer Player": ComputerPlayer}
+        self.players[0] = playerMap[self.game.board_ui.window.playerSelections[0].currentText()]()
+        self.players[1] = playerMap[self.game.board_ui.window.playerSelections[1].currentText()]()
+
+        # Uses random.choice on self.players_index to decide who goes first
         current_player = self.players[self.current_player_choice]
+        self.set_symbols()
+        
+        #
         self.game.board_ui.set_game_labels(self.players)
-        self.game.board_ui.underline_current_player_game_label(
+        self.game.board_ui.display_current_player_game_label(
             self.current_player_choice
         )
+        
 
         if isinstance(current_player, ComputerPlayer):
             self.game.board_ui.delay_action(100, self.game_logic)
@@ -101,7 +111,7 @@ class Play:
         current_player = self.players[self.current_player_choice]
         symbol = current_player.get_symbol()
 
-        self.game.board_ui.remove_game_label_underline()
+        self.game.board_ui.reset_game_label()
 
         if isinstance(current_player, ComputerPlayer):
             move = current_player.make_move(self.game.available_moves)
@@ -113,7 +123,7 @@ class Play:
             button = self.game.board_ui.window.board_tiles[move - 1]
             # self.game.board_ui.make_move(button, symbol)
 
-        self.game.board_ui.underline_current_player_game_label(
+        self.game.board_ui.display_current_player_game_label(
             self.current_player_choice - 1
         )
 
