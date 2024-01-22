@@ -9,61 +9,44 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLabel,
 )
-from PySide6.QtUiTools import QUiLoader
+# from PySide6.QtUiTools import QUiLoader
+from ui.Widget import Ui_Widget
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        ui_file = QFile("ui/Widget.ui")
-        ui_file.open(QFile.ReadOnly)
 
-        loader = QUiLoader()
-        self.window = loader.load(ui_file, self)
+        central_widget = QWidget(self)
+        self.setCentralWidget(central_widget)
 
+        self.ui = Ui_Widget()
+        self.ui.setupUi(central_widget)
+        
         # Initializing the selection of the player types from the QComboBoxes
-        self.playerSelections = []
-        for i in range(1, 3):
-            comboBox = f"player_{i}Selection"
-            self.playerSelections.append(
-                self.window.findChild(QtWidgets.QComboBox, comboBox)
-            )
-
+        self.playerSelections = [self.ui.player_1Selection, self.ui.player_2Selection]
+        
         # Initializing the game results label
-        self.game_results_label = self.window.findChild(
-            QtWidgets.QLabel, "gameResultsLabel"
-        )
-
-        # Initialzing each players score next to their selection
-        self.player_score_labels = []
-        for i in range(1, 3):
-            label = f"player_{i}Score"
-            self.player_score_labels.append(
-                self.window.findChild(QtWidgets.QLabel, label)
-            )
-
+        self.game_results_label = self.ui.gameResultsLabel
+        
+        # Initializing each players score next to their selection
+        self.player_score_labels = [self.ui.player_1Score, self.ui.player_2Score]
+        
         # Initializing the tab and then hiding the tab bar
-        self.tab_menu = self.window.findChild(QtWidgets.QTabWidget, "tabWidget")
+        self.tab_menu = self.ui.tabWidget
         self.tab_menu.tabBar().hide()
 
         # Initializing the start game button
-        self.start_game_button = self.window.findChild(
-            QtWidgets.QPushButton, "startGameButton"
-        )
-
+        self.start_game_button = self.ui.startGameButton
+        
         # Initializing a list of the labels inside of the game tab
-        self.game_labels = []
-        for i in range(1, 3):
-            label_name = f"gameLabel_{i}"
-            self.game_labels.append(self.window.findChild(QtWidgets.QLabel, label_name))
-
+        self.game_labels = [self.ui.gameLabel_1, self.ui.gameLabel_2]
+        
         # Initializing a list of the board tiles
         self.board_tiles = []
         for i in range(1, 10):
             tile_name = f"tile_{i}"
-            self.board_tiles.append(
-                self.window.findChild(QtWidgets.QPushButton, tile_name)
-            )
+            self.board_tiles.append(getattr(self.ui, tile_name))
 
 
 def init_app():
