@@ -1,0 +1,96 @@
+QWidget {
+    background-color: #2c2c2c;
+    color: #dddddd;
+    border: none;
+}
+
+/* Removing the border from the application */
+QTabWidget {
+    border: none;
+}
+QTabWidget::pane{
+    border:none
+}
+
+/* Styling the player selections */
+QComboBox {
+    background-color: #4f4f4f;
+}
+
+/* General styles for all QPushButtons */
+QPushButton {
+    background-color: #3b3b3b;
+}
+QPushButton::hover {
+    background-color: #4f4f4f;
+}
+
+/* styles only apply to the board tiles */
+/* QPushButton[class='boardTile'] {
+    background-color: #3b3b3b;
+    border-color: #5e5e5e;
+    border-style: solid;
+    color: #888888;
+}
+QPushButton[class='boardTile']::hover {
+    background-color: #4a4a4a;;
+} */
+
+
+
+/* Rounding the corners of the board */
+QPushButton#tile_1 {
+    border-top-left-radius: 30px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+}
+QPushButton#tile_2 {
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+}
+QPushButton#tile_3 {
+    border-top-right-radius: 30px;
+    border-left-width: 4px;
+    border-bottom-width: 4px;
+}
+QPushButton#tile_4 {
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+}
+QPushButton#tile_5 {
+    border-width: 4px;
+}
+QPushButton#tile_6 {
+    border-top-width: 4px;
+    border-left-width: 4px;
+    border-bottom-width: 4px;
+}
+QPushButton#tile_7 {
+    border-bottom-left-radius: 30px;
+    border-top-width: 4px;
+    border-right-width: 4px;
+}
+QPushButton#tile_8 {
+    border-top-width: 4px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+}
+QPushButton#tile_9 {
+    border-bottom-right-radius: 30px;
+    border-top-width: 4px;
+    border-left-width: 4px;
+}
+
+/* Winning tiles */
+QPushButton[classe='winningTile'] {
+    background-color: #00ab61;
+    border-color: #00854b;
+    border-style: solid;
+    color: #888888;
+}
+/* Setting up the TicTacToe borders with borders on the tiles */
+
+
+

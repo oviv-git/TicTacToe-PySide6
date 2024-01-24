@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1105</width>
-    <height>894</height>
+    <width>700</width>
+    <height>760</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,6 +18,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>760</height>
+   </size>
   </property>
   <property name="baseSize">
    <size>
@@ -27,6 +33,9 @@
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -39,7 +48,7 @@
        <string>Tab 1</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,1">
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
         <widget class="QLabel" name="gameLogo">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -72,7 +81,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Player 1 Wins</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -82,7 +91,7 @@
           <enum>QLayout::SetMinimumSize</enum>
          </property>
          <item>
-          <layout class="QHBoxLayout" name="infoHLayout" stretch="4,2,4">
+          <layout class="QHBoxLayout" name="infoHLayout" stretch="4,1,4">
            <property name="sizeConstraint">
             <enum>QLayout::SetMaximumSize</enum>
            </property>
@@ -91,15 +100,21 @@
              <item>
               <layout class="QHBoxLayout" name="infoTopLeftHLayout" stretch="5,1">
                <property name="sizeConstraint">
-                <enum>QLayout::SetMaximumSize</enum>
+                <enum>QLayout::SetNoConstraint</enum>
                </property>
                <item alignment="Qt::AlignHCenter">
                 <widget class="QComboBox" name="player_1Selection">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>250</width>
+                   <height>0</height>
+                  </size>
                  </property>
                  <property name="font">
                   <font>
@@ -155,15 +170,21 @@
              <item>
               <layout class="QHBoxLayout" name="infoTopRightHLayout" stretch="5,1">
                <property name="sizeConstraint">
-                <enum>QLayout::SetMaximumSize</enum>
+                <enum>QLayout::SetNoConstraint</enum>
                </property>
                <item alignment="Qt::AlignHCenter">
                 <widget class="QComboBox" name="player_2Selection">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>250</width>
+                   <height>0</height>
+                  </size>
                  </property>
                  <property name="font">
                   <font>
@@ -235,29 +256,29 @@
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,2">
+      <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,3">
        <property name="spacing">
         <number>0</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>16</number>
        </property>
        <property name="topMargin">
         <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>16</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>48</number>
        </property>
        <item>
         <layout class="QHBoxLayout" name="gameInfoLayout" stretch="2,1,0,1,2">
-         <item alignment="Qt::AlignHCenter">
+         <item alignment="Qt::AlignLeft">
           <widget class="QLabel" name="gameLabel_1">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -289,7 +310,7 @@
            <property name="sizeHint" stdset="0">
             <size>
              <width>0</width>
-             <height>60</height>
+             <height>40</height>
             </size>
            </property>
           </spacer>
@@ -310,11 +331,11 @@
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignHCenter">
+         <item alignment="Qt::AlignRight">
           <widget class="QLabel" name="gameLabel_2">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -347,8 +368,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -392,8 +413,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -437,8 +458,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -486,8 +507,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -531,8 +552,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -576,8 +597,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -625,8 +646,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -670,8 +691,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">
@@ -715,8 +736,8 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>250</width>
-               <height>250</height>
+               <width>200</width>
+               <height>200</height>
               </size>
              </property>
              <property name="sizeIncrement">

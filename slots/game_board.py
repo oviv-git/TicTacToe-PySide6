@@ -4,12 +4,12 @@ from PySide6.QtWidgets import QPushButton
 
 class BoardUi(QObject):
     """
-    Responsible for managing the Ui elements of the game. Connects the slots of the 
-    board tiles, all the labels that display information about the current players 
+    Responsible for managing the Ui elements of the game. Connects the slots of the
+    board tiles, all the labels that display information about the current players
     and the results of the games.
 
-    :ivar button_clicked: button_clicked (Signal): Signal emitted when a signal (QPushButton) 
-    is clicked
+    :ivar button_clicked: button_clicked (Signal): Signal emitted when a signal (QPushButton)
+    is clicked so it can be utilized in the Play class in src.game.py
     """
 
     button_clicked = Signal(QPushButton)
@@ -70,12 +70,18 @@ class BoardUi(QObject):
         current_label.setFont(font)
 
     def update_score(self, winning_player):
-        # print(self.window.player_score_labels[winning_player].text())
         new_score = 1 + int(self.window.player_score_labels[winning_player].text())
         self.window.player_score_labels[winning_player].setText(str(new_score))
 
     def update_results_label(self, game_results):
         self.window.game_results_label.setText(game_results)
+
+    def display_winning_tiles(self, winning_tiles):
+        for tile in winning_tiles:
+            # print(self.window.board_tiles[tile - 1].objectName())
+            self.window.board_tiles[tile - 1].setProperty("class", "winningTile")
+        
+
 
     def delay_action(self, delay, function, *args, **kwargs):
         QTimer.singleShot(delay, lambda: function(*args, **kwargs))
