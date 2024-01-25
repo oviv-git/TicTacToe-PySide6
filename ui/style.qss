@@ -15,6 +15,7 @@ QTabWidget::pane{
 /* Styling the player selections */
 QComboBox {
     background-color: #4f4f4f;
+    border-radius: 6px;
 }
 
 /* General styles for all QPushButtons */
@@ -23,6 +24,10 @@ QPushButton {
 }
 QPushButton::hover {
     background-color: #4f4f4f;
+}
+
+QPushButton#startGameButton {
+    border-radius: 15px;
 }
 
 /* styles only apply to the board tiles */
@@ -35,8 +40,6 @@ QPushButton[class='boardTile'] {
 QPushButton[class='boardTile']::hover {
     background-color: #4a4a4a;;
 }
-
-
 
 /* Rounding the corners of the board */
 QPushButton#tile_1 {
@@ -83,10 +86,7 @@ QPushButton#tile_9 {
     border-left-width: 4px;
 }
 
-/* Winning tiles */
+/* Changes the color of the winning tiles to show what won */
 QPushButton[type='winningTile'] {
-    background-color: #00ab61;
-    border-color: #00854b;
-    border-style: solid;
-    color: #888888;
+    color: #00b768; 
 }

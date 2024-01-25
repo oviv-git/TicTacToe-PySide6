@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        #Legacy QUiLoader
+        # Legacy QUiLoader
 
         # ui_file = QFile("ui/Widget.ui")
         # ui_file.open(QFile.ReadOnly)

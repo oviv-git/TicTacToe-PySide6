@@ -1,26 +1,70 @@
 import random
-import time
 from src.player import HumanPlayer, ComputerPlayer
 
 
 class TicTacToe:
-    # find out what type board_ui is for the annotation
+    """
+    The TicTacToe game class which is responsible for keeping track of the players moves,
+    the current board state, the current remaining valid moves, remaking the board state and 
+    remaining available moves after each game and checking if any player met the win condition
+    after each move. 
+
+    :param board_ui: Gives access to the Board_Ui class which is resposible for the Ui of the game
+    :type board_ui: BoardUi
+    """
     def __init__(self, board_ui):
+        """
+        Intiializes the TicTacToe game instance
+
+        Sets up the board and the available moves, which start out as the same.
+        The board gets filled with each players symbols while the moves in available_moves get
+        slowly removed as the board gets filled up, and initializes the winning_tiles list which stays
+        empty until the win condition is reached.
+
+        :param board_ui: An instance of the BoardUi class so that the the ui of the game can be modified
+                         based on the users actions
+        :type board_ui: BoardUi
+        """
         self.board = [i + 1 for i in range(9)]
         self.available_moves = [i + 1 for i in range(9)]
         self.board_ui = board_ui
         self.winning_tiles = []
 
     def remake_board(self):
+        """
+        Whenever a game is completed the board and available_moves get reset back to 
+        their original states to prepare for the next game.
+        """
         self.board = [i + 1 for i in range(9)]
         self.available_moves = [i + 1 for i in range(9)]
-        # self.winning_tiles = []
 
     def make_move(self, move, symbol):
+        """
+        In charge of recording the move thats made
+
+        Whenever a button in the self.board_ui.window.board_tiles list is pressed it updates
+        the self.board list with the symbol of the player who pressed it and removes the index of
+        the button that was pressed from the self.available_moves list.
+
+        :param move: The index of the button that was clicked
+        :type move: int
+
+        :param symbol: The symbol of the player that made the move
+        :type symbol: string
+        """
         self.board[move - 1] = symbol
         self.available_moves.remove(move)
 
     def check_for_win(self):
+        """
+        After each move checks the self.board list if it has met any of the win conditions
+        if a win condition is met also creates a self.winning_tiles list with the tiles
+        that met the win condition to be used in the board_ui class instance
+
+        :return: If a win condition is met returns True, if its not returns False
+        :rtype: bool
+        """
+
         # Horizontal Win Condition
         for i in range(0, 9, 3):
             row = set(self.board[i : i + 3])
@@ -50,7 +94,24 @@ class TicTacToe:
 
 
 class Play:
+    """
+    Responsible for handling all of the game logic and making it a action based application
+    based off of the buttons that are clicked in the BoardUi class
+    """
     def __init__(self, game):
+        """
+        Initializes the Play object
+        
+        Initializes the player objects in a class so they can be indexed into easily, sets up
+        a toggle list to track which players turn it is by toggling between those two options 
+        and using it to index into the self.players list. Sets up the connections for the 
+        game.window.board_tiles so they can listen for the signal that gets emitted when one
+        of them gets clicked. 
+
+        :param game: An object instance of the game class which gives this class access to the
+                     BoardUi class and the QMainWindow class inside of that.
+        :type game: Play object
+        """
         self.game = game
         self.players = [HumanPlayer(), ComputerPlayer()]
         self.current_player_choice = self.select_first_player()
@@ -59,11 +120,21 @@ class Play:
         self.game.board_ui.button_clicked.connect(self.board_button_click)
 
     def setup_connections(self):
+        """
+        Sets up a connection to the start_game_button QPushButton that starts the game and
+        switches to the game tab whenever the button is clicked.
+        """
         self.game.board_ui.window.start_game_button.clicked.connect(
             self.start_game_button
         )
 
     def start_game_button(self):
+        """
+        Changes the current tab index to the game tab, updates self.players with the selected
+        player objects so that the user can play with another human or against the cpu,sets the 
+        symbols for each player based off of whoever gets to go first,sets the game labels based 
+        on the players and their symbols, highlights which player gets to go first.
+        """
         # The only way to change tabs is with the 'Start Game' button
         self.game.board_ui.window.tab_menu.setCurrentIndex(1)
 
@@ -88,9 +159,19 @@ class Play:
 
         # If the current_player is a CPU then delay the action so its not instant
         if isinstance(current_player, ComputerPlayer):
-            self.game.board_ui.delay_action(100, self.game_logic)
+            self.game_logic()
 
     def board_button_click(self, button):
+        """
+        Whenever a QPushButton in the self.game.board_ui.window.board_tiles is pressed 
+        it saves that current button to a variable and calls the game_logic function
+        which takes advantage of that button. The reason its not passed into the game_logic 
+        function directly is because the CPU doesn't actually press the button. It just 
+        simulates a press programmatically
+
+        :param button: The actual QPushButton object that was clicked
+        :type button: QPushButton
+        """
         self.current_button = button
         self.game_logic()
 
@@ -105,11 +186,11 @@ class Play:
         return random.choice([0, 1])
 
     def set_symbols(self):
-        """sumary_line
+        """
+        Sets the symbols for each player object
 
-        Keyword arguments:
-        argument -- description
-        Return: return_description
+        As per the rules of TicTacToe the first player will always be 'X' which leaves
+        the player who gets to act second with the 'O' symbol 
         """
 
         self.players[self.current_player_choice].set_symbol("X")
@@ -140,10 +221,6 @@ class Play:
             move = current_player.make_move(self.current_button)
             button = self.game.board_ui.window.board_tiles[move - 1]
 
-        self.game.board_ui.display_current_player_game_label(
-            self.current_player_choice - 1
-        )
-
         self.game.board_ui.make_move(button, symbol)
         self.game.make_move(int(move), symbol)
 
@@ -153,10 +230,15 @@ class Play:
             self.game.board_ui.delay_action(1500, self.declare_winner)
 
         elif len(self.game.available_moves) == 0:
-            self.declare_tie_game()
+            self.game.board_ui.delay_action(1000, self.declare_tie_game)
 
         else:
+            self.game.board_ui.display_current_player_game_label(
+                self.current_player_choice - 1
+            )
             self.swap_current_player()
+
+            # I
             if isinstance(
                 self.players[self.current_player_choice], ComputerPlayer
             ) and isinstance(
@@ -175,12 +257,22 @@ class Play:
         self.game.board_ui.finish_current_game()
 
     def declare_winner(self):
+        """
+        If a win condition is reached sets up th winning player string, updates the 
+        results_labels on the Menu Tab and updates the winning players score by adding 1,
+        and then resets the game so that it can be played again without restarting.
+        """
         results_text = f"Player {self.current_player_choice + 1} Wins!"
         self.game.board_ui.update_results_label(results_text)
         self.game.board_ui.update_score(self.current_player_choice)
         self.reset_game()
 
     def declare_tie_game(self):
+        """
+        If game.availabe_moves runs out before a win condition is met then declare a tie
+        The text displayed on the Menu Tab shows that it's a tie game, the player scores don't 
+        get updated and the game resets to prepare for the next game.
+        """
         results_text = "Tie Game"
         self.game.board_ui.update_results_label(results_text)
         self.reset_game()
