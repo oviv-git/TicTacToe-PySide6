@@ -78,10 +78,19 @@ class BoardUi(QObject):
 
     def display_winning_tiles(self, winning_tiles):
         for tile in winning_tiles:
-            # print(self.window.board_tiles[tile - 1].objectName())
-            self.window.board_tiles[tile - 1].setProperty("class", "winningTile")
-        
+            tile_widget = self.window.board_tiles[tile - 1]
+            tile_widget.setProperty("type", "winningTile")
+            tile_widget.style().unpolish(tile_widget)
+            tile_widget.style().polish(tile_widget)
+            tile_widget.update()
 
+    def reset_winning_tiles(self, winning_tiles):
+        for tile in winning_tiles:
+            tile_widget = self.window.board_tiles[tile - 1]
+            tile_widget.setProperty("type", None)
+            tile_widget.style().unpolish(tile_widget)
+            tile_widget.style().polish(tile_widget)
+            tile_widget.update()
 
     def delay_action(self, delay, function, *args, **kwargs):
         QTimer.singleShot(delay, lambda: function(*args, **kwargs))

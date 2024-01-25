@@ -170,13 +170,13 @@ class Play:
     def reset_game(self):
         self.current_player_choice = self.select_first_player()
         self.set_symbols()
+        self.game.board_ui.reset_winning_tiles(self.game.winning_tiles)
         self.game.remake_board()
         self.game.board_ui.finish_current_game()
 
     def declare_winner(self):
         results_text = f"Player {self.current_player_choice + 1} Wins!"
         self.game.board_ui.update_results_label(results_text)
-        
         self.game.board_ui.update_score(self.current_player_choice)
         self.reset_game()
 
