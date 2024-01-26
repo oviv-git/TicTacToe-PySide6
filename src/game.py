@@ -208,48 +208,72 @@ class Play:
             self.current_player_choice = 0
 
     def game_logic(self):
+        """
+        The main function in charge of the game logic.
+
+        In charge of making the moves and making sure both the ui and the lists in
+        the game object instance get updated properly, checks for a win condition after
+        every move, if the win condition is not met, checks if the board has any more 
+        remaining free tiles. If it does it and its a HumanPlayers turn it waits for them
+        to click on a tile to repeat, if its a CPU's turn it automatically repeats the function
+        """
         current_player = self.players[self.current_player_choice]
+        # Gets the symbol for the current player so it can be applied to the button
         symbol = current_player.get_symbol()
 
+        # Resets the font style of the game label so it can be set only to the current player
         self.game.board_ui.reset_game_label()
 
+        # If the current_player is a CPU then programatically simulates a click 
         if isinstance(current_player, ComputerPlayer):
             move = current_player.make_move(self.game.available_moves)
             button = self.game.board_ui.window.board_tiles[move - 1]
 
+        # If the current player is a human then the button is selected by whatever they click on
         elif isinstance(current_player, HumanPlayer):
             move = current_player.make_move(self.current_button)
             button = self.game.board_ui.window.board_tiles[move - 1]
 
+        # Makes a move on both the board_ui and the game objects.
         self.game.board_ui.make_move(button, symbol)
         self.game.make_move(int(move), symbol)
 
+        # Checks if the win condition was met afte the move
         if self.game.check_for_win():
+            # If it was disable all tiles and highlight the tiles that met the win condition
             self.game.board_ui.disable_all_tiles()
             self.game.board_ui.display_winning_tiles(self.game.winning_tiles)
+
+            # Delay reseting the board so the users can see what tiles met the win condition
             self.game.board_ui.delay_action(1500, self.declare_winner)
 
+        # If self.game.available_moves is empty it means there are no more moves and its a tie
         elif len(self.game.available_moves) == 0:
+
+            # Delays reseting the board for a bit less because there is nothing to see
             self.game.board_ui.delay_action(1000, self.declare_tie_game)
 
+        # If the win condition is not met and there are more remaining moves then swap the player
+        # and swap the label highlight to display the opposite player
         else:
             self.game.board_ui.display_current_player_game_label(
                 self.current_player_choice - 1
             )
             self.swap_current_player()
 
-            # I
-            if isinstance(
-                self.players[self.current_player_choice], ComputerPlayer
-            ) and isinstance(
-                self.players[self.current_player_choice - 1], ComputerPlayer
-            ):
-                self.game.board_ui.delay_action(200, self.game_logic)
-
-            elif isinstance(self.players[self.current_player_choice], ComputerPlayer):
+            # If the new current player is a CPU then call game_logic again.
+            if isinstance(self.players[self.current_player_choice], ComputerPlayer):
                 self.game_logic()
 
     def reset_game(self):
+        """
+        Resets the game back to its original state both in the game object instance and
+        in the game.board_ui object instance
+
+        Randomly selects the first player again, sets the symbols again for the new first player
+        resets new style on the winning tiles back to their original state and enables all the 
+        board tiles that were disabled after they've been clicked and removes the symbols from them.
+        """
         self.current_player_choice = self.select_first_player()
         self.set_symbols()
         self.game.board_ui.reset_winning_tiles(self.game.winning_tiles)

@@ -50,8 +50,10 @@ class BoardUi(QObject):
         When a button in window.board_tiles is clicked it emits a signal containing that
         button to src/game.py which in turn returns that same button object and the current
         players symbol back to self.make_move() so the symbol can be displayed on the button
-        Args:
-            button (_type_): _description_
+
+        :param button: Whenever a QPushButton is clicked that button instance emits a signal with 
+                       itself as an argument so that it can be used in other parts of the code
+        :type button: QPushButton
         """
         button.setEnabled(False)
         self.button_clicked.emit(button)
