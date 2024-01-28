@@ -62,7 +62,15 @@ class MainWindow(QMainWindow):
 
 
 def init_app():
-    """TODO"""
+    """
+    Initialize and return the main application and main window objects.
+
+    This function creates an instance of QApplication and a MainWindow. It sets the size of the main window 
+    to 600x600 pixels.
+
+    :return: A tuple containing the QApplication instance and the MainWindow instance.
+    :rtype: (QApplication, MainWindow)
+    """
 
     app = QApplication(sys.argv)
     main_window = MainWindow()
